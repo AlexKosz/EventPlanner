@@ -1,6 +1,29 @@
 const mongoose = require("mongoose");
 
 
+const foodOptionSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: [true, "Name is required"]
+    },
+    description: {
+        type: String,
+        required: false
+    },
+    vegetarian: {
+        type: Boolean,
+        required: false,
+    },
+    vegan: {
+        type: Boolean,
+        required: false,
+    },
+    glutenFree: {
+        type: Boolean,
+        required: false,
+    },
+});
+
 const EventSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -56,10 +79,7 @@ const EventSchema = new mongoose.Schema({
         type: Array,
     },
 
-    //TODO Link to at least one food option model
-    foodOptions: {
-        type: Array,
-    },
+    foodOptions: [foodOptionSchema],
 
 }, { timestamps: true });
 
