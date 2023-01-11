@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const FoodSchema = new mongoose.Schema({
     guestName: String,
-    foodChoice: String
+    foodChoice: String,
 }, {timestamps: true});
 
 const RsvpSchema = new mongoose.Schema({
