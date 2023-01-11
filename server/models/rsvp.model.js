@@ -1,5 +1,9 @@
 const mongoose = require("mongoose");
 
+const FoodSchema = new mongoose.Schema({
+    guestName: String,
+    foodChoice: String
+}, {timestamps: true});
 
 const RsvpSchema = new mongoose.Schema({
     fullName: {
@@ -10,7 +14,7 @@ const RsvpSchema = new mongoose.Schema({
         type: String,
         required: [true, "Code is required"]
     },
-    quantity: {
+    approvedQuantity: {
         type: Number,
         required: false
     },
@@ -19,10 +23,9 @@ const RsvpSchema = new mongoose.Schema({
         default: false
     },
 
-    // Array of IDs
-    // Length must equal quantity or 1
+    // Length must equal approvedQuantity or 1
     foodChoices: {
-        type: Array,
+        type: [FoodSchema],
         required: false
     },
 
