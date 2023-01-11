@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
-
-const foodOptionSchema = new mongoose.Schema({
+const foodOptionSchema = Schema({
     name: {
         type: String,
         required: [true, "Name is required"]
@@ -24,7 +24,7 @@ const foodOptionSchema = new mongoose.Schema({
     },
 });
 
-const EventSchema = new mongoose.Schema({
+const EventSchema = Schema({
     title: {
         type: String,
         required: [true, "title is required"]
@@ -34,9 +34,9 @@ const EventSchema = new mongoose.Schema({
         default: true,
     },
 
-    //TODO validate date after now
     date: {
         type: Date,
+        min: Date.now,
         required: [true, "Date is required"]
     },
     rsvpBy: {
@@ -62,22 +62,25 @@ const EventSchema = new mongoose.Schema({
         type: String,
     },
 
-    //TODO Link to at least one User
-    organizers: {
-        type: Array,
-        required: [true, "Organizers are required"]
-    },
+    organizers: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    ],
 
-    //TODO Link to ONE location
     venue: {
-        type: mongoose.ObjectId,
+        type: Schema.Types.ObjectId,
+        ref: 'Location',
         required: [true, "Venue is required"]
     },
 
-    //TODO Link to at least one RSVP model
-    guests: {
-        type: Array,
-    },
+    guests: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Rsvp'
+        }
+    ],
 
     foodOptions: [foodOptionSchema],
 
