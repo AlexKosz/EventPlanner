@@ -19,7 +19,7 @@ class UserController {
         User.findOne({ email: req.body.email })
             .then(user => {
                 if (user === null) {
-                    res.json({ msg: "Invalid login attempt - email" })
+                    res.json({ msg: "Invalid email or password" })
                 }
                 else {
                     bcrypt.compare(req.body.password, user.password)
@@ -29,7 +29,7 @@ class UserController {
                                     .json({ msg: "succ" });
                             }
                             else {
-                                res.json({ msg: "Failure - pass" })
+                                res.json({ msg: "Invalid email or password" })
                             }
                         })
                         .catch(err => res.json({ msg: "invalid attempt" }, err))
