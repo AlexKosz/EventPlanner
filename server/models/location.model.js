@@ -16,7 +16,7 @@ const LocationSchema = new mongoose.Schema({
     },
     street2: {
         type: String,
-        required: [true, "street2 is required"],
+        required: false,
     },
     city: {
         type: String,
